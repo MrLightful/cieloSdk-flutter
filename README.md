@@ -54,14 +54,24 @@ CieloCard card = CieloCard(
 await Cielo.sop.sendCard(card, accessToken: accessToken);
 ```
 
-### Card Validation
+### Errors
 ```dart
 try {
   Cielo.sop.sendCard(brokenCard, accessToken: accessToken);
 } on CieloCardValidationException catch (e) {
+  // Handle card validation errors.
   print(e.field); // Name of the field that caused the error.
   print(e.code); // The code of the error for dev use.
   print(e.message); // User-friendly message, localized according to core options.
+} on CieloException catch (e) {
+  // Handle SDK errors.
+  // Currently, only thrown for invalid accessToken in SOP.
+  print(e.code); // The code of the error for dev use.
+  print(e.message); // The error message for dev use.
+} on CieloAPIException catch (e) {
+  // Handle API errors returned by the provider.
+  print(e.code); // The code of the error for dev use.
+  print(e.message); // The error message for dev use.
 }
 ```
 
