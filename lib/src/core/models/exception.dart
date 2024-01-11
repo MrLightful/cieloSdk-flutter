@@ -15,11 +15,30 @@ class CieloAPIException implements Exception {
 }
 
 /// Exception thrown for validation errors caught before making the request to Cielo API.
-class CieloValidationException implements Exception {
+class CieloException implements Exception {
     final String field;
-    final String message;
-    CieloValidationException({required this.field, required this.message});
+    final String code;
+    final String? message;
+    CieloException({
+      required this.field,
+      required this.code,
+      this.message,
+    });
 
     @override
-    String toString() => '[CieloValidationException] $field - $message';
+    String toString() => '[CieloValidationException] $field - $code - $message';
+}
+
+class CieloCardValidationException implements Exception {
+  final String field;
+  final String code;
+  final String? message;
+  CieloCardValidationException({
+    required this.field,
+    required this.code,
+    this.message,
+  });
+
+  @override
+  String toString() => '[CieloCardValidationException] $field - $code - $message';
 }

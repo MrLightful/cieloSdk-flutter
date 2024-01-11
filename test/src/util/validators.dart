@@ -7,26 +7,23 @@ void main() {
   group('validate access tokens', () {
 
     group('accepts valid access tokens', () {
-      test('valid token #1', () => expect(CieloSOPValidators.validateAccessToken('SGVsbG8gd29ybGQh'), true));
-      test('valid token #2', () => expect(CieloSOPValidators.validateAccessToken('MTIzNDU2Nzg5MA=='), true));
-      test('valid token #3', () => expect(CieloSOPValidators.validateAccessToken('aW52YWxpZCBpbnN0YW5jZQ=='), true));
+      test('valid token #1', () => expect(CieloValidators.validateAccessToken('SGVsbG8gd29ybGQh'), true));
+      test('valid token #2', () => expect(CieloValidators.validateAccessToken('MTIzNDU2Nzg5MA=='), true));
+      test('valid token #3', () => expect(CieloValidators.validateAccessToken('aW52YWxpZCBpbnN0YW5jZQ=='), true));
     });
 
     group('rejects invalid access tokens', () {
-      test('reject null', () {
-        expect(() => CieloSOPValidators.validateAccessToken(null), throwsA(isA<CieloValidationException>()));
-      });
       test('reject empty', () {
-        expect(() => CieloSOPValidators.validateAccessToken(''), throwsA(isA<CieloValidationException>()));
+        expect(() => CieloValidators.validateAccessToken(''), throwsA(isA<CieloException>()));
       });
       test('reject missing padding characters', () {
-        expect(() => CieloSOPValidators.validateAccessToken('SGVsbG8gd29ybGQ'), throwsA(isA<CieloValidationException>()));
+        expect(() => CieloValidators.validateAccessToken('SGVsbG8gd29ybGQ'), throwsA(isA<CieloException>()));
       });
       test('incorrect number of padding characters', () {
-        expect(() => CieloSOPValidators.validateAccessToken('SGVsbG8gd29ybGQ=='), throwsA(isA<CieloValidationException>()));
+        expect(() => CieloValidators.validateAccessToken('SGVsbG8gd29ybGQ=='), throwsA(isA<CieloException>()));
       });
       test('contains non-base64 characters', () {
-        expect(() => CieloSOPValidators.validateAccessToken('SGVsbG8gd29ybGQh!'), throwsA(isA<CieloValidationException>()));
+        expect(() => CieloValidators.validateAccessToken('SGVsbG8gd29ybGQh!'), throwsA(isA<CieloException>()));
       });
     });
 
@@ -36,26 +33,23 @@ void main() {
 
 
     group('accepts valid card holder names', () {
-      test('valid name #1', () => expect(CieloSOPValidators.validateHolderName('Andrew Peterson'), true));
-      test('valid name #2', () => expect(CieloSOPValidators.validateHolderName('Andrew Peterson II'), true));
-      test('valid name #3', () => expect(CieloSOPValidators.validateHolderName('Chan Li'), true));
+      test('valid name #1', () => expect(CieloValidators.validateHolderName('Andrew Peterson'), true));
+      test('valid name #2', () => expect(CieloValidators.validateHolderName('Andrew Peterson II'), true));
+      test('valid name #3', () => expect(CieloValidators.validateHolderName('Chan Li'), true));
     });
 
     group('rejects invalid card holder names', () {
-      test('reject null', () {
-        expect(() => CieloSOPValidators.validateHolderName(null), throwsA(isA<CieloValidationException>()));
-      });
       test('reject empty', () {
-        expect(() => CieloSOPValidators.validateHolderName(''), throwsA(isA<CieloValidationException>()));
+        expect(() => CieloValidators.validateHolderName(''), throwsA(isA<CieloCardValidationException>()));
       });
       test('reject too short', () {
-        expect(() => CieloSOPValidators.validateHolderName('An'), throwsA(isA<CieloValidationException>()));
+        expect(() => CieloValidators.validateHolderName('An'), throwsA(isA<CieloCardValidationException>()));
       });
       test('reject too long', () {
-        expect(() => CieloSOPValidators.validateHolderName('A' * 65), throwsA(isA<CieloValidationException>()));
+        expect(() => CieloValidators.validateHolderName('A' * 65), throwsA(isA<CieloCardValidationException>()));
       });
       test('reject disallowed character', () {
-        expect(() => CieloSOPValidators.validateHolderName('Anrew 1'), throwsA(isA<CieloValidationException>()));
+        expect(() => CieloValidators.validateHolderName('Anrew 1'), throwsA(isA<CieloCardValidationException>()));
       });
     });
 
@@ -64,29 +58,26 @@ void main() {
   group('validate card numbers', () {
 
     group('accepts valid card numbers', () {
-      test('valid number #1', () => expect(CieloSOPValidators.validateCardNumber('4111111111111111'), true));
-      test('valid number #2', () => expect(CieloSOPValidators.validateCardNumber('5500000000000004'), true));
-      test('bypass MOD10 check', () => expect(CieloSOPValidators.validateCardNumber('3400000000000009', validateMod10: false), true));
+      test('valid number #1', () => expect(CieloValidators.validateCardNumber('4111111111111111'), true));
+      test('valid number #2', () => expect(CieloValidators.validateCardNumber('5500000000000004'), true));
+      test('bypass MOD10 check', () => expect(CieloValidators.validateCardNumber('5500000000000011', validateMod10: false), true));
     });
 
     group('rejects invalid card numbers', () {
-      test('reject null', () {
-        expect(() => CieloSOPValidators.validateCardNumber(null), throwsA(isA<CieloValidationException>()));
-      });
       test('reject empty', () {
-        expect(() => CieloSOPValidators.validateCardNumber(''), throwsA(isA<CieloValidationException>()));
+        expect(() => CieloValidators.validateCardNumber(''), throwsA(isA<CieloCardValidationException>()));
       });
       test('reject too short', () {
-        expect(() => CieloSOPValidators.validateCardNumber('411111111111111'), throwsA(isA<CieloValidationException>()));
+        expect(() => CieloValidators.validateCardNumber('411111111111111'), throwsA(isA<CieloCardValidationException>()));
       });
       test('reject too long', () {
-        expect(() => CieloSOPValidators.validateCardNumber('41111111111111111'), throwsA(isA<CieloValidationException>()));
+        expect(() => CieloValidators.validateCardNumber('41111111111111111'), throwsA(isA<CieloCardValidationException>()));
       });
       test('reject disallowed character', () {
-        expect(() => CieloSOPValidators.validateCardNumber('411111111111111a'), throwsA(isA<CieloValidationException>()));
+        expect(() => CieloValidators.validateCardNumber('411111111111111a'), throwsA(isA<CieloCardValidationException>()));
       });
       test('reject invalid number', () {
-        expect(() => CieloSOPValidators.validateCardNumber('4111111111111112'), throwsA(isA<CieloValidationException>()));
+        expect(() => CieloValidators.validateCardNumber('4111111111111112'), throwsA(isA<CieloCardValidationException>()));
       });
     });
 
@@ -95,32 +86,29 @@ void main() {
   group('validate card expiration dates', () {
 
     group('accepts valid card expiration dates', () {
-      test('valid date #1', () => expect(CieloSOPValidators.validateExpirationDate('12/2020', checkForExpiredDate: false), true));
-      test('valid date #2', () => expect(CieloSOPValidators.validateExpirationDate('01/2021', checkForExpiredDate: false), true));
-      test('valid date #3', () => expect(CieloSOPValidators.validateExpirationDate('12/2022', checkForExpiredDate: false), true));
+      test('valid date #1', () => expect(CieloValidators.validateExpirationDate('12/2020', checkForExpiredDate: false), true));
+      test('valid date #2', () => expect(CieloValidators.validateExpirationDate('01/2021', checkForExpiredDate: false), true));
+      test('valid date #3', () => expect(CieloValidators.validateExpirationDate('12/2022', checkForExpiredDate: false), true));
     });
 
     group('rejects invalid card expiration dates', () {
-      test('reject null', () {
-        expect(() => CieloSOPValidators.validateExpirationDate(null, checkForExpiredDate: false), throwsA(isA<CieloValidationException>()));
-      });
       test('reject empty', () {
-        expect(() => CieloSOPValidators.validateExpirationDate('', checkForExpiredDate: false), throwsA(isA<CieloValidationException>()));
+        expect(() => CieloValidators.validateExpirationDate('', checkForExpiredDate: false), throwsA(isA<CieloCardValidationException>()));
       });
       test('reject year too short', () {
-        expect(() => CieloSOPValidators.validateExpirationDate('12/20', checkForExpiredDate: false), throwsA(isA<CieloValidationException>()));
+        expect(() => CieloValidators.validateExpirationDate('12/20', checkForExpiredDate: false), throwsA(isA<CieloCardValidationException>()));
       });
       test('reject month too short', () {
-        expect(() => CieloSOPValidators.validateExpirationDate('1/20', checkForExpiredDate: false), throwsA(isA<CieloValidationException>()));
+        expect(() => CieloValidators.validateExpirationDate('1/20', checkForExpiredDate: false), throwsA(isA<CieloCardValidationException>()));
       });
       test('reject year too long', () {
-        expect(() => CieloSOPValidators.validateExpirationDate('12/20200', checkForExpiredDate: false), throwsA(isA<CieloValidationException>()));
+        expect(() => CieloValidators.validateExpirationDate('12/20200', checkForExpiredDate: false), throwsA(isA<CieloCardValidationException>()));
       });
       test('reject month too long', () {
-        expect(() => CieloSOPValidators.validateExpirationDate('123/2020', checkForExpiredDate: false), throwsA(isA<CieloValidationException>()));
+        expect(() => CieloValidators.validateExpirationDate('123/2020', checkForExpiredDate: false), throwsA(isA<CieloCardValidationException>()));
       });
       test('reject disallowed character', () {
-        expect(() => CieloSOPValidators.validateExpirationDate('12/202a', checkForExpiredDate: false), throwsA(isA<CieloValidationException>()));
+        expect(() => CieloValidators.validateExpirationDate('12/202a', checkForExpiredDate: false), throwsA(isA<CieloCardValidationException>()));
       });
     });
 
@@ -131,13 +119,13 @@ void main() {
       final currentMonthDate = '$curMonth/${now.year}';
       final futureDate = '12/${now.year+1}';
       test('reject expired date', () {
-        expect(() => CieloSOPValidators.validateExpirationDate(expiredDate), throwsA(isA<CieloValidationException>()));
+        expect(() => CieloValidators.validateExpirationDate(expiredDate), throwsA(isA<CieloCardValidationException>()));
       });
       test('reject current month', () {
-        expect(() => CieloSOPValidators.validateExpirationDate(currentMonthDate), throwsA(isA<CieloValidationException>()));
+        expect(() => CieloValidators.validateExpirationDate(currentMonthDate), throwsA(isA<CieloCardValidationException>()));
       });
       test('accept future date', () {
-        expect(CieloSOPValidators.validateExpirationDate(futureDate), true);
+        expect(CieloValidators.validateExpirationDate(futureDate), true);
       });
     });
 
@@ -145,24 +133,21 @@ void main() {
 
   group('validate security code', () {
     group('accepts valid security codes', () {
-      test('valid code #1', () => expect(CieloSOPValidators.validateSecurityCode('123'), true));
-      test('valid code #2', () => expect(CieloSOPValidators.validateSecurityCode('1534'), true));
+      test('valid code #1', () => expect(CieloValidators.validateSecurityCode('123'), true));
+      test('valid code #2', () => expect(CieloValidators.validateSecurityCode('1534'), true));
     });
     group('rejects invalid security codes', () {
-      test('reject null', () {
-        expect(() => CieloSOPValidators.validateSecurityCode(null), throwsA(isA<CieloValidationException>()));
-      });
       test('reject empty', () {
-        expect(() => CieloSOPValidators.validateSecurityCode(''), throwsA(isA<CieloValidationException>()));
+        expect(() => CieloValidators.validateSecurityCode(''), throwsA(isA<CieloCardValidationException>()));
       });
       test('reject too short', () {
-        expect(() => CieloSOPValidators.validateSecurityCode('12'), throwsA(isA<CieloValidationException>()));
+        expect(() => CieloValidators.validateSecurityCode('12'), throwsA(isA<CieloCardValidationException>()));
       });
       test('reject too long', () {
-        expect(() => CieloSOPValidators.validateSecurityCode('12345'), throwsA(isA<CieloValidationException>()));
+        expect(() => CieloValidators.validateSecurityCode('12345'), throwsA(isA<CieloCardValidationException>()));
       });
       test('reject disallowed character', () {
-        expect(() => CieloSOPValidators.validateSecurityCode('12a'), throwsA(isA<CieloValidationException>()));
+        expect(() => CieloValidators.validateSecurityCode('12a'), throwsA(isA<CieloCardValidationException>()));
       });
     });
   });

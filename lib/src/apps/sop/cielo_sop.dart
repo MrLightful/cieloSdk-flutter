@@ -26,11 +26,11 @@ class CieloSOP {
     required CieloCard card,
   }) async {
 
-    CieloSOPValidators.validateAccessToken(accessToken, language: _coreOptions.language);
-    CieloSOPValidators.validateHolderName(card.holderName, language: _coreOptions.language);
-    CieloSOPValidators.validateCardNumber(card.rawNumber, language: _coreOptions.language, validateMod10: options.mod10Required);
-    CieloSOPValidators.validateExpirationDate(card.expirationDate, language: _coreOptions.language);
-    CieloSOPValidators.validateSecurityCode(card.securityCode, language: _coreOptions.language);
+    CieloValidators.validateAccessToken(accessToken, language: _coreOptions.language);
+    CieloValidators.validateHolderName(card.holderName, language: _coreOptions.language);
+    CieloValidators.validateCardNumber(card.rawNumber, validateMod10: options.mod10Required, language: _coreOptions.language);
+    CieloValidators.validateExpirationDate(card.expirationDate, language: _coreOptions.language);
+    CieloValidators.validateSecurityCode(card.securityCode, language: _coreOptions.language);
 
     return _api.sendRequest(
       accessToken: accessToken,

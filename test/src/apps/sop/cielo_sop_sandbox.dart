@@ -34,7 +34,7 @@ void main() {
       () async => await Cielo.sop.sendCard(accessToken: invalidAccessToken, card: card),
       throwsA(isA<CieloAPIException>()),
     );
-  });
+  }, skip: sopAccessToken.isEmpty); // Although token is not needed, it's skipped not to hit sandbox when not intended.
 
   test('successful Silent Order Post request', () async {
     const sopOptions = CieloSOPOptions(enableTokenize: true);
