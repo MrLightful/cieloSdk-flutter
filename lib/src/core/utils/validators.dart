@@ -54,14 +54,28 @@ class CieloSOPValidators {
 
   /// Validate the format of [expirationDate] field.
   /// Throws a localised [CieloValidationException] if the field is invalid.
-  static bool validateExpirationDate(String? expirationDate, {CieloLanguage language = CieloLanguage.pt}) {
+  static bool validateExpirationDate(
+      String? expirationDate,
+      { CieloLanguage language = CieloLanguage.pt, bool checkForExpiredDate = true }
+    ) {
     if (expirationDate == null || expirationDate.isEmpty) {
       throw CieloValidationException(field: 'expirationDate', message: _CieloSOPValidatorsMessages.mandatoryFieldMessage(language: language));
     }
+
     RegExp regExp = RegExp(r'^(0[1-9]|1[0-2])\/([0-9]{4})$');
     if (!regExp.hasMatch(expirationDate)) {
       throw CieloValidationException(field: 'expirationDate', message: _CieloSOPValidatorsMessages.invalidExpirationDateFormatFieldMessage(language: language));
     }
+
+    if (checkForExpiredDate) {
+      final now = DateTime.now();
+      final month = int.parse(expirationDate.substring(0, 2));
+      final year = int.parse(expirationDate.substring(3, 7));
+      if (year < now.year || (year == now.year && month <= now.month)) {
+        throw CieloValidationException(field: 'expirationDate', message: _CieloSOPValidatorsMessages.invalidExpirationDateFormatFieldMessage(language: language));
+      }
+    }
+
     return true;
   }
 

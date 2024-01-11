@@ -95,32 +95,49 @@ void main() {
   group('validate card expiration dates', () {
 
     group('accepts valid card expiration dates', () {
-      test('valid date #1', () => expect(CieloSOPValidators.validateExpirationDate('12/2020'), true));
-      test('valid date #2', () => expect(CieloSOPValidators.validateExpirationDate('01/2021'), true));
-      test('valid date #3', () => expect(CieloSOPValidators.validateExpirationDate('12/2022'), true));
+      test('valid date #1', () => expect(CieloSOPValidators.validateExpirationDate('12/2020', checkForExpiredDate: false), true));
+      test('valid date #2', () => expect(CieloSOPValidators.validateExpirationDate('01/2021', checkForExpiredDate: false), true));
+      test('valid date #3', () => expect(CieloSOPValidators.validateExpirationDate('12/2022', checkForExpiredDate: false), true));
     });
 
     group('rejects invalid card expiration dates', () {
       test('reject null', () {
-        expect(() => CieloSOPValidators.validateExpirationDate(null), throwsA(isA<CieloValidationException>()));
+        expect(() => CieloSOPValidators.validateExpirationDate(null, checkForExpiredDate: false), throwsA(isA<CieloValidationException>()));
       });
       test('reject empty', () {
-        expect(() => CieloSOPValidators.validateExpirationDate(''), throwsA(isA<CieloValidationException>()));
+        expect(() => CieloSOPValidators.validateExpirationDate('', checkForExpiredDate: false), throwsA(isA<CieloValidationException>()));
       });
       test('reject year too short', () {
-        expect(() => CieloSOPValidators.validateExpirationDate('12/20'), throwsA(isA<CieloValidationException>()));
+        expect(() => CieloSOPValidators.validateExpirationDate('12/20', checkForExpiredDate: false), throwsA(isA<CieloValidationException>()));
       });
       test('reject month too short', () {
-        expect(() => CieloSOPValidators.validateExpirationDate('1/20'), throwsA(isA<CieloValidationException>()));
+        expect(() => CieloSOPValidators.validateExpirationDate('1/20', checkForExpiredDate: false), throwsA(isA<CieloValidationException>()));
       });
       test('reject year too long', () {
-        expect(() => CieloSOPValidators.validateExpirationDate('12/20200'), throwsA(isA<CieloValidationException>()));
+        expect(() => CieloSOPValidators.validateExpirationDate('12/20200', checkForExpiredDate: false), throwsA(isA<CieloValidationException>()));
       });
       test('reject month too long', () {
-        expect(() => CieloSOPValidators.validateExpirationDate('123/2020'), throwsA(isA<CieloValidationException>()));
+        expect(() => CieloSOPValidators.validateExpirationDate('123/2020', checkForExpiredDate: false), throwsA(isA<CieloValidationException>()));
       });
       test('reject disallowed character', () {
-        expect(() => CieloSOPValidators.validateExpirationDate('12/202a'), throwsA(isA<CieloValidationException>()));
+        expect(() => CieloSOPValidators.validateExpirationDate('12/202a', checkForExpiredDate: false), throwsA(isA<CieloValidationException>()));
+      });
+    });
+
+    group('validate actual expiration status of the dates', () {
+      final now = DateTime.now();
+      final curMonth = '${now.month < 10 ? '0' : ''}${now.month}';
+      final expiredDate = '12/${now.year-1}';
+      final currentMonthDate = '$curMonth/${now.year}';
+      final futureDate = '12/${now.year+1}';
+      test('reject expired date', () {
+        expect(() => CieloSOPValidators.validateExpirationDate(expiredDate), throwsA(isA<CieloValidationException>()));
+      });
+      test('reject current month', () {
+        expect(() => CieloSOPValidators.validateExpirationDate(currentMonthDate), throwsA(isA<CieloValidationException>()));
+      });
+      test('accept future date', () {
+        expect(CieloSOPValidators.validateExpirationDate(futureDate), true);
       });
     });
 
