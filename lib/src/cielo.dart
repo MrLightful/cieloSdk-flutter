@@ -2,6 +2,7 @@ import 'package:cielo_flutter/cielo_flutter.dart';
 import 'package:cielo_flutter/src/apps/sop/cielo_sop.dart';
 
 class Cielo {
+
   Cielo._();
   static Cielo _instance = Cielo._();
 
@@ -63,6 +64,7 @@ class Cielo {
     return _instance._sop!;
   }
 
+  /// Reset Cielo SDK from all configurations.
   static void dispose() {
     _instance = Cielo._();
   }

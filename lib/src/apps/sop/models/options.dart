@@ -1,9 +1,19 @@
 /// Options to be used when initializing the Cielo SOP SDK.
 class CieloSOPOptions {
+
+  /// Whether the CVV is required or not.
   final bool cvvRequired;
+
+  /// Whether the mod10 (Luhn) validation is required or not.
   final bool mod10Required;
+
+  /// Whether BIN query check is enabled or not.
   final bool enableBinQuery;
+
+  /// Whether Verify Card (Zero Auth) check is enabled or not.
   final bool enableVerifyCard;
+
+  /// Whether tokenization is enabled or not.
   final bool enableTokenize;
 
   const CieloSOPOptions({

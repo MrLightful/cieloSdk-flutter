@@ -3,8 +3,13 @@ import 'dart:convert';
 import 'package:cielo_flutter/cielo_flutter.dart';
 import 'package:http/http.dart' as http;
 
+/// The API service for Silent Order Post product.
 class CieloSOPApi {
+
+  /// The options used in the core's sdk.
   final CieloOptions options;
+
+  /// The options used for Silent Order Post sdk.
   final CieloSOPOptions sopOptions;
 
   const CieloSOPApi({required this.options, required this.sopOptions});
