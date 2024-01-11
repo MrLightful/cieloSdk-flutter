@@ -5,7 +5,7 @@ repository: https://github.com/romatallinn/cieloSdk-flutter
 
 environment:
   sdk: '>=3.1.0 <4.0.0'
-  flutter: ^3.0.0
+  flutter: '>=3.0.0'
 
 dependencies:
   flutter:

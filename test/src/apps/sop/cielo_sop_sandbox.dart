@@ -31,7 +31,7 @@ void main() {
       securityCode: '123'
     );
     expect(
-      () async => await Cielo.sop.sendCard(accessToken: invalidAccessToken, card: card),
+      () async => await Cielo.sop.sendCard(card, accessToken: invalidAccessToken),
       throwsA(isA<CieloAPIException>()),
     );
   }, skip: sopAccessToken.isEmpty); // Although token is not needed, it's skipped not to hit sandbox when not intended.
@@ -47,7 +47,7 @@ void main() {
       securityCode: '123'
     );
 
-    await Cielo.sop.sendCard(accessToken: sopAccessToken, card: card);
+    await Cielo.sop.sendCard(card, accessToken: sopAccessToken);
   }, skip: sopAccessToken.isEmpty);
 
 }

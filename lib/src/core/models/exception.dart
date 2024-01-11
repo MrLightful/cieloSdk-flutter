@@ -10,6 +10,7 @@ class CieloAPIException implements Exception {
     this.message = '',
   });
 
+  @override
   String toString() => '[CieloAPIException] $code - $message';
 
 }
