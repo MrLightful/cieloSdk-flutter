@@ -1,7 +1,7 @@
 name: cielo_flutter
 description: Cielo/Braspag SDK for Flutter
 version: 0.0.1
-repository: https://github.com/romatallinn/cielo_flutter
+repository: https://github.com/romatallinn/cieloSdk-flutter
 
 environment:
   sdk: '>=3.1.0 <4.0.0'
