@@ -21,10 +21,7 @@ class CieloSOP {
   /// Sends a card to Cielo SOP API.
   /// [accessToken] is the access token needed to complete the request. It must be obtained by your backend application via OAuth2.
   /// Throws [CieloAPIException] if Cielo returns failure.
-  Future<dynamic> sendCard({
-    required String accessToken,
-    required CieloCard card,
-  }) async {
+  Future<dynamic> sendCard(CieloCard card, { required String accessToken }) async {
 
     CieloValidators.validateAccessToken(accessToken, language: _coreOptions.language);
     CieloValidators.validateHolderName(card.holderName, language: _coreOptions.language);
