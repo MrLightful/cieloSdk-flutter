@@ -54,5 +54,22 @@ CieloCard card = CieloCard(
 await Cielo.sop.sendCard(card, accessToken: accessToken);
 ```
 
+### Card Validation
+```dart
+try {
+  Cielo.sop.sendCard(brokenCard, accessToken: accessToken);
+} on CieloCardValidationException catch (e) {
+  print(e.field); // Name of the field that caused the error.
+  print(e.code); // The code of the error for dev use.
+  print(e.message); // User-friendly message, localized according to core options.
+}
+```
+
+### Other
+```dart
+// To reset SDK from all configurations.
+Cielo.dispose();
+```
+
 # License
 Licensed under the MIT license, see [`LICENSE`](LICENSE).
