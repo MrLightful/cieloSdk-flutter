@@ -36,7 +36,7 @@ void main() {
     );
   },
       skip: sopAccessToken
-          .isEmpty); // Although token is not needed, it's skipped not to hit sandbox when not intended.
+          .isEmpty); // Although valid token is not needed, it's skipped not to hit sandbox when not intended.
 
   test('successful Silent Order Post request', () async {
     const sopOptions = CieloSOPOptions(enableTokenize: true);
