@@ -1,4 +1,3 @@
-
 /// Exception thrown when the Cielo API returns an error.
 class CieloAPIException implements Exception {
 
@@ -12,22 +11,21 @@ class CieloAPIException implements Exception {
 
   @override
   String toString() => '[CieloAPIException] $code - $message';
-
 }
 
 /// Exception thrown for validation errors caught before making the request to Cielo API.
 class CieloException implements Exception {
-    final String field;
-    final String code;
-    final String? message;
-    CieloException({
-      required this.field,
-      required this.code,
-      this.message,
-    });
+  final String field;
+  final String code;
+  final String? message;
+  CieloException({
+    required this.field,
+    required this.code,
+    this.message,
+  });
 
-    @override
-    String toString() => '[CieloValidationException] $field - $code - $message';
+  @override
+  String toString() => '[CieloValidationException] $field - $code - $message';
 }
 
 class CieloCardValidationException implements Exception {
@@ -41,5 +39,6 @@ class CieloCardValidationException implements Exception {
   });
 
   @override
-  String toString() => '[CieloCardValidationException] $field - $code - $message';
+  String toString() =>
+      '[CieloCardValidationException] $field - $code - $message';
 }

@@ -1,7 +1,5 @@
-
 /// The model of the credit/debit card data to be sent to the Cielo API.
 class CieloCard {
-
   final String holderName;
   final String rawNumber;
   final String expirationDate;
@@ -15,10 +13,9 @@ class CieloCard {
   });
 
   Map<String, dynamic> toJson() => {
-    "HolderName": holderName,
-    "RawNumber": rawNumber,
-    "Expiration": expirationDate,
-    "SecurityCode": securityCode,
-  };
-
+        "HolderName": holderName,
+        "RawNumber": rawNumber,
+        "Expiration": expirationDate,
+        "SecurityCode": securityCode,
+      };
 }

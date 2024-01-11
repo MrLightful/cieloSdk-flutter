@@ -2,14 +2,13 @@ import 'package:cielo_flutter/cielo_flutter.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-
   setUp(Cielo.dispose);
 
   test('successful basic sdk initialization', () {
     const options = CieloOptions();
     Cielo.init(options);
   });
-  
+
   test('successful sdk initialization with non-default options', () {
     const options = CieloOptions(
       environment: CieloEnvironment.production,
@@ -63,5 +62,4 @@ void main() {
     expect(Cielo.sop.options.enableTokenize, sopOptions.enableTokenize);
     expect(Cielo.sop.options.enableVerifyCard, sopOptions.enableVerifyCard);
   });
-
 }

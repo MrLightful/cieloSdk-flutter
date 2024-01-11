@@ -1,12 +1,10 @@
 /// Options to be used when initializing the Cielo SOP SDK.
 class CieloSOPOptions {
-
   final bool cvvRequired;
   final bool mod10Required;
   final bool enableBinQuery;
   final bool enableVerifyCard;
   final bool enableTokenize;
-
 
   const CieloSOPOptions({
     this.cvvRequired = true,
@@ -15,5 +13,4 @@ class CieloSOPOptions {
     this.enableVerifyCard = false,
     this.enableTokenize = false,
   });
-
 }

@@ -3,16 +3,11 @@ import 'dart:convert';
 import 'package:cielo_flutter/cielo_flutter.dart';
 import 'package:http/http.dart' as http;
 
-
 class CieloSOPApi {
-
   final CieloOptions options;
   final CieloSOPOptions sopOptions;
 
-  const CieloSOPApi({
-    required this.options,
-    required this.sopOptions
-  });
+  const CieloSOPApi({required this.options, required this.sopOptions});
 
   /// Returns the base URL of Cielo API for the selected provider and environment.
   String get _baseUrl {
@@ -44,7 +39,6 @@ class CieloSOPApi {
     required CieloCard card,
     required CieloSOPOptions options,
   }) async {
-
     final apiUrl = '$_baseUrl/post/api/public/v1/card';
     var headers = {
       'Content-type': 'application/x-www-form-urlencoded',
@@ -63,14 +57,14 @@ class CieloSOPApi {
       return '$key=$value';
     }).join('&');
 
-    var response = await http.post(Uri.parse(apiUrl), headers: headers, body: r);
+    var response =
+        await http.post(Uri.parse(apiUrl), headers: headers, body: r);
 
     if (response.statusCode == 201) {
       return jsonDecode(response.body);
     } else {
-      throw CieloAPIException(code: response.statusCode, message: response.reasonPhrase);
+      throw CieloAPIException(
+          code: response.statusCode, message: response.reasonPhrase);
     }
-
   }
-
 }
