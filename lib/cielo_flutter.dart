@@ -1,7 +1,11 @@
 library cielo_flutter;
 
-export 'src/models/card.dart';
-export 'src/models/exception.dart';
-export 'src/models/options.dart';
+// Core
+export 'src/core/models/card.dart';
+export 'src/core/models/exception.dart';
+export 'src/core/options.dart';
 
-export 'src/cielo_sop.dart';
+// Silent Order Post
+export 'src/apps/sop/models/options.dart';
+
+export 'src/cielo.dart';

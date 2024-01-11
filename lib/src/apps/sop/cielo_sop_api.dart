@@ -1,27 +1,52 @@
 import 'dart:convert';
 
 import 'package:cielo_flutter/cielo_flutter.dart';
+import 'package:cielo_flutter/src/apps/sop/models/options.dart';
 import 'package:http/http.dart' as http;
 
 
-typedef CieloApiCallback = void Function(dynamic response);
+class CieloSOPApi {
 
-class CieloApi {
+  final CieloOptions options;
+  final CieloSOPOptions sopOptions;
 
-  const CieloApi._();
+  const CieloSOPApi({
+    required this.options,
+    required this.sopOptions
+  });
+
+  /// Returns the base URL of Cielo API for the selected provider and environment.
+  String get _baseUrl {
+    if (options.provider == CieloProvider.braspag) {
+      switch (options.environment) {
+        case CieloEnvironment.production:
+          return "https://transaction.com.br";
+        case CieloEnvironment.sandbox:
+        default:
+          return "https://transactionsandbox.pagador.com.br";
+      }
+    }
+    switch (options.environment) {
+      case CieloEnvironment.production:
+        return "https://transaction.cieloecommerce.cielo.com.br";
+      case CieloEnvironment.sandbox:
+      default:
+        return "https://transactionsandbox.cieloecommerce.cielo.com.br";
+    }
+  }
 
   /// Sends a request to the Cielo Silent Order Post API.
   /// [accessToken] is the access token needed to complete the request. It must be obtained by your backend application via OAuth2.
   /// [options] is optional. If not set, it will fallback to initialized options.
   /// Throws [CieloAPIException] if Cielo returns failure.
   /// Learn more: https://developercielo.github.io/en/manual/cielo-ecommerce#integration193
-  static dynamic sendRequest({
+  Future<dynamic> sendRequest({
     required String accessToken,
-    required CieloSOPCard card,
+    required CieloCard card,
     required CieloSOPOptions options,
-    CieloApiCallback? onSuccess,
   }) async {
 
+    final apiUrl = '$_baseUrl/post/api/public/v1/card';
     var headers = {
       'Content-type': 'application/x-www-form-urlencoded',
       'Accept': 'application/json',
@@ -39,11 +64,10 @@ class CieloApi {
       return '$key=$value';
     }).join('&');
 
-    var response = await http.post(Uri.parse(options.apiUrl), headers: headers, body: r);
+    var response = await http.post(Uri.parse(apiUrl), headers: headers, body: r);
 
     if (response.statusCode == 201) {
-      var responseBody = jsonDecode(response.body);
-      onSuccess?.call(responseBody);
+      return jsonDecode(response.body);
     } else {
       throw CieloAPIException(code: response.statusCode, message: response.reasonPhrase);
     }

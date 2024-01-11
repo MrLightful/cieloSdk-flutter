@@ -1,5 +1,5 @@
 import 'package:cielo_flutter/cielo_flutter.dart';
-import 'package:cielo_flutter/src/util/validators.dart';
+import 'package:cielo_flutter/src/core/utils/validators.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

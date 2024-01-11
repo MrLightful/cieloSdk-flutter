@@ -1,4 +1,4 @@
-import 'package:cielo_flutter/src/util/luhn.dart';
+import 'package:cielo_flutter/src/core/utils/luhn.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

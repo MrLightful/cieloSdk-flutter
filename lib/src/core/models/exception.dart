@@ -10,6 +10,8 @@ class CieloAPIException implements Exception {
     this.message = '',
   });
 
+  String toString() => '[CieloAPIException] $code - $message';
+
 }
 
 /// Exception thrown for validation errors caught before making the request to Cielo API.
@@ -19,5 +21,5 @@ class CieloValidationException implements Exception {
     CieloValidationException({required this.field, required this.message});
 
     @override
-    String toString() => '$field $message';
+    String toString() => '[CieloValidationException] $field - $message';
 }

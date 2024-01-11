@@ -1,5 +1,6 @@
-import 'package:cielo_flutter/cielo_flutter.dart';
-import 'package:cielo_flutter/src/util/luhn.dart';
+import 'package:cielo_flutter/src/core/utils/luhn.dart';
+import 'package:cielo_flutter/src/core/models/exception.dart';
+import 'package:cielo_flutter/src/core/options.dart';
 
 /// The set of validators for the card data validity.
 class CieloSOPValidators {
