@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:cielo_sop_flutter/cielo_sop_flutter.dart';
+import 'package:cielo_flutter/cielo_flutter.dart';
 import 'package:http/http.dart' as http;
 
 

@@ -1,4 +1,4 @@
-library cielo_sop_flutter;
+library cielo_flutter;
 
 export 'src/models/card.dart';
 export 'src/models/exception.dart';

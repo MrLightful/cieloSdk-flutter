@@ -1,11 +1,11 @@
-name: cielo_sop_flutter
-description: A new Flutter project.
+name: cielo_flutter
+description: Cielo/Braspag SDK for Flutter
 version: 0.0.1
-homepage:
+repository: https://github.com/romatallinn/cielo_flutter
 
 environment:
   sdk: '>=3.1.0 <4.0.0'
-  flutter: ">=1.17.0"
+  flutter: ^3.0.0
 
 dependencies:
   flutter:
