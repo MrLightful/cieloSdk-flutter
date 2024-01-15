@@ -1,6 +1,5 @@
 /// Exception thrown when the Cielo API returns an error.
 class CieloAPIException implements Exception {
-
   /// HTTP status code from the error response.
   final int code;
 
@@ -18,7 +17,6 @@ class CieloAPIException implements Exception {
 
 /// Exception thrown for validation errors caught before making the request to Cielo API.
 class CieloException implements Exception {
-
   /// Field name that failed validation.
   final String field;
 
@@ -40,7 +38,6 @@ class CieloException implements Exception {
 
 /// The card validation exception. Thrown when the card data is invalid.
 class CieloCardValidationException implements Exception {
-
   /// Field name that failed validation.
   final String field;
 

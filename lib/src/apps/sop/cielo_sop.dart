@@ -8,7 +8,6 @@ import 'package:cielo_flutter/src/core/utils/validators.dart';
 ///   - Cielo: https://developercielo.github.io/en/manual/cielo-ecommerce#silent-order-post
 ///   - Braspag: https://braspag.github.io//manualp/braspag-silent-order-post
 class CieloSOP {
-
   /// The options used in the core's sdk.
   final CieloOptions _coreOptions;
 

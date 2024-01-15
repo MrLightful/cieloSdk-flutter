@@ -2,7 +2,6 @@ import 'package:cielo_flutter/cielo_flutter.dart';
 import 'package:cielo_flutter/src/apps/sop/cielo_sop.dart';
 
 class Cielo {
-
   Cielo._();
   static Cielo _instance = Cielo._();
 

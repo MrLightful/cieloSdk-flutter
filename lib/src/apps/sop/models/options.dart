@@ -1,6 +1,5 @@
 /// Options to be used when initializing the Cielo SOP SDK.
 class CieloSOPOptions {
-
   /// Whether the CVV is required or not.
   final bool cvvRequired;
 

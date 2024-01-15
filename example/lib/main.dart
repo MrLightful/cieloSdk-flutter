@@ -3,7 +3,6 @@ import 'package:credit_card_form/credit_card_form.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-
   // Initialize Cielo once at start.
   const options = CieloOptions(
     provider: CieloProvider.braspag,
@@ -42,7 +41,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   final controller = CreditCardController();
   CieloCard? card;
   String? accessToken;
@@ -67,7 +65,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 card = CieloCard(
                   rawNumber: result.cardNumber,
                   holderName: result.cardHolderName,
-                  expirationDate: '${result.expirationMonth}/20${result.expirationYear}',
+                  expirationDate:
+                      '${result.expirationMonth}/20${result.expirationYear}',
                   securityCode: result.cvc,
                 );
               },
@@ -85,8 +84,8 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () async {
                 if (card != null && accessToken != null) {
                   try {
-                    final r = await Cielo.sop.sendCard(
-                        card!, accessToken: accessToken!);
+                    final r = await Cielo.sop
+                        .sendCard(card!, accessToken: accessToken!);
                     setState(() {
                       response = r;
                     });
@@ -109,12 +108,14 @@ class _MyHomePageState extends State<MyHomePage> {
               child: const Text('Save Card'),
             ),
             const SizedBox(height: 24),
-            if (response != null) Card(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(response!.toString(), textAlign: TextAlign.center),
+            if (response != null)
+              Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child:
+                      Text(response!.toString(), textAlign: TextAlign.center),
+                ),
               ),
-            ),
           ],
         ),
       ),

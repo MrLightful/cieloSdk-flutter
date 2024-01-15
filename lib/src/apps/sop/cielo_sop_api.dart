@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 
 /// The API service for Silent Order Post product.
 class CieloSOPApi {
-
   /// The options used in the core's sdk.
   final CieloOptions options;
 

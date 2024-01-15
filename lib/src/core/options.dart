@@ -9,7 +9,6 @@ enum CieloProvider { cielo, braspag }
 
 /// Options to be used when initializing the Cielo SDK.
 class CieloOptions {
-
   /// The provider to be used: cielo or braspag.
   final CieloProvider provider;
 

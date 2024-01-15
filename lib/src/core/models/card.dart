@@ -1,6 +1,5 @@
 /// The model of the credit/debit card data to be sent to the Cielo API.
 class CieloCard {
-
   /// The card holder name.
   final String holderName;
 
