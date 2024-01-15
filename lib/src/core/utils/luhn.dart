@@ -1,9 +1,10 @@
-
 /// Validates the card number using the Luhn algorithm (MOD10).
 bool validateCardNumberMod10(String cardNumber) {
   cardNumber = cardNumber.replaceAll(RegExp(r'\s+\b|\b\s'), '');
 
-  if (cardNumber.isEmpty || cardNumber.length < 2 || cardNumber.contains(RegExp(r'[^0-9]'))) {
+  if (cardNumber.isEmpty ||
+      cardNumber.length < 2 ||
+      cardNumber.contains(RegExp(r'[^0-9]'))) {
     return false;
   }
 

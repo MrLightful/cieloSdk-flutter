@@ -9,15 +9,18 @@ enum CieloProvider { cielo, braspag }
 
 /// Options to be used when initializing the Cielo SDK.
 class CieloOptions {
-
-  final CieloEnvironment environment;
-  final CieloLanguage language;
+  /// The provider to be used: cielo or braspag.
   final CieloProvider provider;
 
+  /// The environment to be used: production or sandbox.
+  final CieloEnvironment environment;
+
+  /// The language to be used: pt, en or es.
+  final CieloLanguage language;
+
   const CieloOptions({
+    this.provider = CieloProvider.cielo,
     this.environment = CieloEnvironment.sandbox,
     this.language = CieloLanguage.pt,
-    this.provider = CieloProvider.cielo,
   });
-
 }

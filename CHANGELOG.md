@@ -1,3 +1,15 @@
+## 0.0.2
+
+The release mostly meant to improve Pub scoring of the package.
+
+- Longer project description
+- Example project
+- More dartdoc for public API
+- Dart formatting
+
+*Breaking change:* 
+- Fix method signature: `Cielo.sop.sendCard(CieloCard card, {required String accessToken})`.
+
 ## 0.0.1
 
 The first public release of the package.
