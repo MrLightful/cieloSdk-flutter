@@ -18,7 +18,7 @@ class CieloSOPApi {
     if (options.provider == CieloProvider.braspag) {
       switch (options.environment) {
         case CieloEnvironment.production:
-          return "https://transaction.com.br";
+          return "https://www.pagador.com.br";
         case CieloEnvironment.sandbox:
         default:
           return "https://transactionsandbox.pagador.com.br";
