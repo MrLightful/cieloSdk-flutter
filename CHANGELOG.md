@@ -1,3 +1,7 @@
+# 0.0.4
+
+- Allow localized character sets for cardholder names
+
 ## 0.0.3
 
 Quickfix for incorrect API URL for Braspag's Silent Order Post in production.

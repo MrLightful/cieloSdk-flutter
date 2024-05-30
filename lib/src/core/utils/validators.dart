@@ -48,7 +48,7 @@ class CieloValidators {
         ),
       );
     }
-    RegExp regExp = RegExp(r'^[a-zA-Z ]{3,64}$');
+    RegExp regExp = RegExp(r'^[A-Za-zŽžÀ-ÿ ]{3,64}$');
     if (!regExp.hasMatch(holderName)) {
       throw CieloCardValidationException(
         field: 'holderName',
