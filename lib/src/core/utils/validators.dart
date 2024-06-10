@@ -80,17 +80,17 @@ class CieloValidators {
         ),
       );
     }
-    String regex = r'^(?:4[0-9]{12}(?:[0-9]{3})?'       // Visa
-                   r'|5[1-5][0-9]{14}'                  // MasterCard
-                   r'|3[47][0-9]{13}'                   // American Express
-                   r'|3(?:0[0-5]|[68][0-9])[0-9]{11}'   // Diners Club
-                   r'|6(?:011|5[0-9]{2})[0-9]{12}'      // Discover
-                   r'|(?:2131|1800|35\d{3})\d{11})$';   // JCB
+    String regex = r'^(?:4[0-9]{12}(?:[0-9]{3})?'         // Visa
+                   r'|^5[1-5][0-9]{14}$'                  // MasterCard
+                   r'|^3[47][0-9]{13}$'                   // American Express
+                   r'|^3(?:0[0-5]|[68][0-9])[0-9]{11}$'   // Diners Club
+                   r'|^6(?:011|5[0-9]{2})[0-9]{12}$'      // Discover
+                   r'|^(?:2131|1800|35\d{3})\d{11})$';    // JCB
 
     // Allow pre-defined test card numbers in sandbox mode.
     // Learn more: https://braspag.github.io/en/manual/braspag-pagador#test-cards-(simulado)
     if (isSandbox) {
-      regex +=     r'|[0]{15}[1-9]';
+      regex +=     r'|^[0]{15}[1-9]$';
     }
 
     RegExp regExp = RegExp(regex);
