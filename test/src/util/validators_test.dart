@@ -85,6 +85,10 @@ void main() {
           () => expect(
               CieloValidators.validateCardNumber('5500000000000004'), true));
       test(
+          'valid test card number in sandbox',
+          () => expect(
+              CieloValidators.validateCardNumber('0000000000000002', isSandbox: true), true));
+      test(
           'bypass MOD10 check',
           () => expect(
               CieloValidators.validateCardNumber('5500000000000011',
@@ -111,6 +115,10 @@ void main() {
       });
       test('reject invalid number', () {
         expect(() => CieloValidators.validateCardNumber('4111111111111112'),
+            throwsA(isA<CieloCardValidationException>()));
+      });
+      test('reject test number in prod', () {
+        expect(() => CieloValidators.validateCardNumber('0000000000000002'),
             throwsA(isA<CieloCardValidationException>()));
       });
     });
