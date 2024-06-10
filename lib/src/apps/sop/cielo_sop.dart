@@ -32,8 +32,12 @@ class CieloSOP {
         language: _coreOptions.language);
     CieloValidators.validateHolderName(card.holderName,
         language: _coreOptions.language);
-    CieloValidators.validateCardNumber(card.rawNumber,
-        validateMod10: options.mod10Required, language: _coreOptions.language);
+    CieloValidators.validateCardNumber(
+      card.rawNumber,
+      validateMod10: options.mod10Required,
+      language: _coreOptions.language,
+      isSandbox: _coreOptions.environment == CieloEnvironment.sandbox,
+    );
     CieloValidators.validateExpirationDate(card.expirationDate,
         language: _coreOptions.language);
     CieloValidators.validateSecurityCode(card.securityCode,
