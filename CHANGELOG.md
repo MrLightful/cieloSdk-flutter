@@ -1,3 +1,8 @@
+## 0.0.6
+
+- Skip mod10 validation for test cards in sandbox mode.
+- Add tests for card number validation of test cards in sandbox mode. 
+
 ## 0.0.5
 
 - Fix validation for pre-defined test card numbers in sandbox mode.

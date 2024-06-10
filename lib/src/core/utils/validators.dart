@@ -80,7 +80,7 @@ class CieloValidators {
         ),
       );
     }
-    String regex = r'^(?:4[0-9]{12}(?:[0-9]{3})?'         // Visa
+    const regex = r'^(?:4[0-9]{12}(?:[0-9]{3})?'         // Visa
                    r'|^5[1-5][0-9]{14}$'                  // MasterCard
                    r'|^3[47][0-9]{13}$'                   // American Express
                    r'|^3(?:0[0-5]|[68][0-9])[0-9]{11}$'   // Diners Club
@@ -89,12 +89,12 @@ class CieloValidators {
 
     // Allow pre-defined test card numbers in sandbox mode.
     // Learn more: https://braspag.github.io/en/manual/braspag-pagador#test-cards-(simulado)
-    if (isSandbox) {
-      regex +=     r'|^[0]{15}[1-9]$';
-    }
+    const sandboxRegex = r'^0{15}[1-9]$';
 
+    RegExp sandboxRegExp = RegExp(sandboxRegex);
     RegExp regExp = RegExp(regex);
-    if (!regExp.hasMatch(cardNumber)) {
+    final isSandboxTestCard = isSandbox && sandboxRegExp.hasMatch(cardNumber);
+    if (!regExp.hasMatch(cardNumber) && !isSandboxTestCard) {
       throw CieloCardValidationException(
         field: 'cardNumber',
         code: 'INVALID_FORMAT',
@@ -103,7 +103,7 @@ class CieloValidators {
             language: language),
       );
     }
-    if (validateMod10) {
+    if (validateMod10 && !isSandboxTestCard) {
       if (!validateCardNumberMod10(cardNumber)) {
         throw CieloCardValidationException(
           field: 'cardNumber',
