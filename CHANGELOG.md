@@ -1,3 +1,8 @@
+## 0.0.5
+
+- Fix validation for pre-defined test card numbers in sandbox mode.
+  Learn more: https://braspag.github.io/en/manual/braspag-pagador#test-cards-(simulado)
+
 ## 0.0.4
 
 - Allow localized character sets for cardholder names
